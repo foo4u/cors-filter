@@ -1,0 +1,7 @@
+<ivy-module version="2.0">
+    <info organisation="net.rossillo" module="cors-filter"/>
+    <dependencies>
+      <dependency org="javax.servlet" name="servlet-api" rev="2.3" />
+    </dependencies>
+</ivy-module>
+
