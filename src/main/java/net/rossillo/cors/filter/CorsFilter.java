@@ -1,81 +1,38 @@
 package net.rossillo.cors.filter;
 
-import java.io.IOException;
-
 import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
- * Provides cross-origin resource sharing filter.
+ * Provides a cross-origin resource sharing filter.
  * 
  * @author Scott Rossillo
  *
  */
-public final class CorsFilter implements Filter {
-	
+public interface CorsFilter extends Filter {
+
 	/**
-	 * Creates a new CORS filter.
+	 * Returns true if the given origin server is permitted by this filter.
+	 * 
+	 * @param origin the value of the request's HTTP "Origin" header
+	 * 
+	 * @return <code>true</code> if the given <code>origin</code> is permitted by
+	 * this filter; <code>false</code> otherwise
 	 */
-	public CorsFilter() {
-		
-	}
+	boolean allowOrigin(String origin);
 
-	public void init(FilterConfig filterConfig) throws ServletException {
-		// TODO Auto-generated method stub
-
-	}
-	
 	/**
-	 * Returns true if the given request is a pre-flight
-	 * cross-origin resource sharing request; false otherwise.
+	 * Returns true if the given HTTP method is permitted by this filter.
+	 * 
+	 * @param method the HTTP method being requested (e.g. GET, POST).
+	 * 
+	 * @return <code>true</code> if the given <code>method</code> is permitted by
+	 * this filter; <code>false</code> otherwise
 	 */
-	protected boolean isPreFlightRequest(final HttpServletRequest request) {
-		return "OPTIONS".equalsIgnoreCase(request.getMethod());
-	}
+	boolean allowMethod(String method);
 
-	public void doFilter(
-			final ServletRequest request, 
-			final ServletResponse response,
-			final FilterChain chain) throws IOException, ServletException {
-		this.doFilter((HttpServletRequest)request, (HttpServletResponse)response, chain);
-	}
-	
-	public void doFilter(
-			final HttpServletRequest request, 
-			final HttpServletResponse response,
-			final FilterChain chain) throws IOException, ServletException { 
-	
-		System.err.println("CORS: " + request.getRequestURI());
-		System.err.println("CORS: Origin = " + request.getHeader("Origin"));
-		
-		if (this.isPreFlightRequest(request)) {
-			System.err.println("CORS: DOING PRE-FLIGHT");
-			this.handlePreFlightRequest(request, response);
-		} else {
-			response.addHeader("Access-Control-Allow-Origin", "*");
-			System.err.println("CORS: DOING CHAIN");
-			chain.doFilter(request, response);
-		}
-		
-	}
-
-	public void destroy() {
-		// TODO Auto-generated method stub
-
-	}
-
-	private void handlePreFlightRequest(
-			final HttpServletRequest request, 
-			final HttpServletResponse response) {
-		response.addHeader("Access-Control-Allow-Origin", "*");
-		response.addHeader("Access-Control-Allow-Headers", "*");
-		response.addHeader("Access-Control-Allow-Methods", "HEAD, GET, OPTIONS");
-	}
+	/**
+	 * Returns a comma delimited list of permitted HTTP methods.
+	 */
+	String allowedMethods();
 
 }

@@ -1,0 +1,27 @@
+buildscript {
+    repositories {
+        maven { url 'http://repo.springsource.org/plugins-release' }
+    }
+    dependencies {
+        classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.3'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'propdeps'
+
+sourceCompatibility=1.4
+targetCompatibility=1.4
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	provided "javax.servlet:servlet-api:2.3"
+	testCompile "org.springframework:spring-core:2.5.6"
+	testCompile "org.springframework:spring-test:2.5.6"
+	testCompile "junit:junit:3.8.1"
+}
+
