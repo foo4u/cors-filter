@@ -42,7 +42,7 @@ public final class SimpleCorsFilter extends AbstractCorsFilter implements CorsFi
 	}
 
 	public boolean allowMethod(String method) {
-		return allowedMethods.contains(method);
+		return (allowedMethods.indexOf(method.toUpperCase()) > -1);
 	}
 
 	public String allowedMethods() {
