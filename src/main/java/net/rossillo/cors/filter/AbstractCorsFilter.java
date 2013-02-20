@@ -80,20 +80,15 @@ public abstract class AbstractCorsFilter implements CorsFilter{
 	private void doFilter(final HttpServletRequest request, final HttpServletResponse response, final FilterChain chain)
 			throws IOException, ServletException { 
 
-		System.err.println("CORS: " + request.getRequestURI());
-		System.err.println("CORS: Origin = " + request.getHeader("Origin"));
-
 		if (this.isCrossOriginRequest(request) && !this.allowRequest(request)) {
 			response.sendError(403);
 			return;
 		}
 
 		if (this.isPreFlightRequest(request)) {
-			System.err.println("CORS: DOING PRE-FLIGHT");
 			this.handlePreFlightRequest(request, response);
 		} else {
 			this.handleCrossOriginRequest(request, response);
-			System.err.println("CORS: DOING CHAIN");
 			chain.doFilter(request, response);
 		}
 
