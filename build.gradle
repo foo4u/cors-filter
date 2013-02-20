@@ -32,10 +32,10 @@ uploadArchives {
 	repositories {
 		mavenDeployer {
 			repository(url: "http://repo.rossillo.net/nexus/content/repositories/releases/") {
-				authentication(userName: project.ext.deployUsername, password: project.ext.deployPassword)
+				authentication(userName: project.ext.repoUser, password: project.ext.repoPass)
 			}
 			snapshotRepository(url: "http://repo.rossillo.net/nexus/content/repositories/snapshots/") {
-				authentication(userName: project.ext.deployUsername, password: project.ext.deployPassword)
+				authentication(userName: project.ext.repoUser, password: project.ext.repoPass)
 			}
 			pom.project {
 				inceptionYear '2013'
