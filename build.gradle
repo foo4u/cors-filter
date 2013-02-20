@@ -9,10 +9,13 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'maven'
 apply plugin: 'propdeps'
 
 sourceCompatibility=1.4
 targetCompatibility=1.4
+
+group="net.rossillo.cors"
 
 repositories {
 	mavenCentral()
@@ -23,5 +26,33 @@ dependencies {
 	testCompile "org.springframework:spring-core:2.5.6"
 	testCompile "org.springframework:spring-test:2.5.6"
 	testCompile "junit:junit:3.8.1"
+}
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			repository(url: "http://repo.rossillo.net/nexus/content/repositories/releases/") {
+				authentication(userName: project.ext.deployUsername, password: project.ext.deployPassword)
+			}
+			snapshotRepository(url: "http://repo.rossillo.net/nexus/content/repositories/snapshots/") {
+				authentication(userName: project.ext.deployUsername, password: project.ext.deployPassword)
+			}
+			pom.project {
+				inceptionYear '2013'
+				licenses {
+					license {
+						name 'MIT License'
+						url 'https://github.com/foo4u/cors-filter/blob/master/LICENSE.txt'
+						distribution 'repo'
+					}
+				}
+			}
+		}
+	}
+}
+
+task wrapper(type: Wrapper) {
+	description = 'Generates gradlew[.bat] scripts'
+	gradleVersion = '1.4'
 }
 
