@@ -47,7 +47,7 @@ For example, to support `GET`, `POST` and `PUT` requests, specify them as the va
 <dependency>
   <groupId>net.rossillo.cors</groupId>
   <artifactId>cors-filter</artifactId>
-  <version>1.0.0.BUILD-SNAPSHOT</version>
+  <version>${version}</version>
 </dependency>
 ```
 
@@ -70,7 +70,46 @@ For example, to support `GET`, `POST` and `PUT` requests, specify them as the va
 </snapshotRepository>  
 ```
 
+## Building from Source
 
+1. Clone the repository from GitHub
+2. Navigate into the cloned repository directory
+3. Use [Gradle] [2] to build the distribution
+
+```
+$ git clone git://github.com/foo4u/cors-filter.git
+$ cd cors-filter
+$ $ ./gradlew build
+```
+
+## Importing Sources Into Eclipse
+
+1. Generate Eclipse metadata
+2. Once complete, import into Eclipse `File -> Import -> Existing projects into workspace`
+
+```
+$ ./gradlew eclipse
+```
+
+## Issue Tracking
+
+Report bugs and feature requests via [GitHub Issues] [3].
+
+## Contributing
+
+Pull requests welcome.  Please follow these simple guidelines:
+
+1. Fork the repository
+2. Always work on topic branches (e.g. ISSUE-123)
+3. Follow the "Commit Guidelines" outlined in [Pro Git] [4]
+3. When ready to resolve an issue or to collaborate with others, you can push your branch to origin
+4. When ready for your contribution to be reviewed for potential inclusion, send a pull request
+
+## License
+
+CORS Filter is licensed under the MIT License.
 
 [1]: http://en.wikipedia.org/wiki/Cross-origin_resource_sharing "Wikipedia"
-
+[2]: http://www.gradle.org "Gradle"
+[3]: https://github.com/foo4u/cors-filter/issues "Issues"
+[4]: http://git-scm.com/book/ch5-2.html "Pro-Git"
