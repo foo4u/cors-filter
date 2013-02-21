@@ -58,12 +58,7 @@ For example, to support `GET`, `POST` and `PUT` requests, specify them as the va
   <id>releases</id>
   <url>http://repo.rossillo.net/nexus/content/repositories/releases</url>
 </repository>
-  
-<repository>
-  <id>milestones</id>
-  <url>http://repo.rossillo.net/nexus/content/repositories/milestones</url>
-</repository>
-  
+
 <snapshotRepository>
   <id>snapshots</id>
   <url>http://repo.rossillo.net/nexus/content/repositories/snapshots</url>
